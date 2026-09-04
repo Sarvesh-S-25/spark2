@@ -1,0 +1,67 @@
+{
+  "key": "positions.store",
+  "kind": "function",
+  "semver": "1.0.0",
+  "state": "locked",
+  "spec": {
+    "key": "positions.store",
+    "kind": "function",
+    "direction": "server_internal",
+    "summary": "Persistence boundary for position history and latest-per-device.",
+    "transport": {
+      "method": "",
+      "path": "",
+      "symbol": "positionStore"
+    },
+    "input": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        },
+        "at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "deviceId",
+        "lat",
+        "lng",
+        "at"
+      ]
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "written": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "written"
+      ]
+    },
+    "errors": []
+  },
+  "examples": [
+    {
+      "input": {
+        "deviceId": "dev_101",
+        "lat": 12.92,
+        "lng": 12.93,
+        "at": "2026-01-01T09:04:00.000Z"
+      },
+      "output": {
+        "written": true
+      }
+    }
+  ],
+  "spec_hash": "sha256:b47b53c529f598d386743edf9d4691611ba83b4b9c66b2013c5b114ed2147d92"
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "be.config-service",
+  "name": "Config service",
+  "lane": "backend",
+  "kind": "api_route",
+  "summary": "Serves runtime settings to the client.",
+  "responsibilities": [],
+  "non_goals": [],
+  "files": [
+    "server/routes/config.ts"
+  ],
+  "acceptance": [
+    "never returns a secret"
+  ],
+  "est_size": "S",
+  "provides": [
+    "app.config"
+  ],
+  "consumes": []
+}

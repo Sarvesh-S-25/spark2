@@ -1,0 +1,73 @@
+{
+  "key": "Marker",
+  "kind": "type",
+  "semver": "1.0.0",
+  "state": "locked",
+  "spec": {
+    "key": "Marker",
+    "kind": "type",
+    "direction": "shared",
+    "summary": "One thing shown on the map.",
+    "transport": {
+      "method": "",
+      "path": "",
+      "symbol": "Marker"
+    },
+    "input": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        },
+        "label": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "headingDeg": {
+          "type": "number"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "lat",
+        "lng",
+        "label",
+        "kind",
+        "updatedAt"
+      ]
+    },
+    "errors": []
+  },
+  "examples": [
+    {
+      "input": {},
+      "output": {
+        "id": "id_101",
+        "lat": 12.92,
+        "lng": 12.93,
+        "label": "label-4",
+        "kind": "kind-5",
+        "headingDeg": 12.91,
+        "updatedAt": "2026-01-01T09:02:00.000Z"
+      }
+    }
+  ],
+  "spec_hash": "sha256:74c17fc444564277229c30dc2c1855aa04cb8d8aa9dc9cf61730dbf3d917181e"
+}

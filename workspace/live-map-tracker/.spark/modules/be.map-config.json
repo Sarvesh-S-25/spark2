@@ -1,0 +1,20 @@
+{
+  "slug": "be.map-config",
+  "name": "Map config service",
+  "lane": "backend",
+  "kind": "api_route",
+  "summary": "Serves tile provider settings and the default viewport.",
+  "responsibilities": [],
+  "non_goals": [],
+  "files": [
+    "server/routes/mapConfig.ts"
+  ],
+  "acceptance": [
+    "returns a valid tile template"
+  ],
+  "est_size": "S",
+  "provides": [
+    "map.config"
+  ],
+  "consumes": []
+}

@@ -1,0 +1,30 @@
+{
+  "slug": "fe.marker-layer",
+  "name": "Marker layer",
+  "lane": "frontend",
+  "kind": "ui_component",
+  "summary": "Draws markers for the current viewport and applies live movement events.",
+  "responsibilities": [
+    "fetch markers for the bbox",
+    "diff and animate positions"
+  ],
+  "non_goals": [
+    "owning the viewport",
+    "websocket lifecycle"
+  ],
+  "files": [
+    "src/map/MarkerLayer.tsx"
+  ],
+  "acceptance": [
+    "re-queries within 300ms of a viewport change",
+    "moves a marker on a marker.moved event"
+  ],
+  "est_size": "M",
+  "provides": [],
+  "consumes": [
+    "markers.list",
+    "Marker",
+    "map.viewport",
+    "markers.stream"
+  ]
+}

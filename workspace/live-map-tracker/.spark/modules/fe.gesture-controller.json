@@ -1,0 +1,26 @@
+{
+  "slug": "fe.gesture-controller",
+  "name": "Gesture controller",
+  "lane": "frontend",
+  "kind": "ui_component",
+  "summary": "Touch pan, pinch zoom and inertia, translated into viewport commands.",
+  "responsibilities": [
+    "pointer and touch handling",
+    "inertia and clamping"
+  ],
+  "non_goals": [
+    "any network access at all"
+  ],
+  "files": [
+    "src/map/GestureController.tsx"
+  ],
+  "acceptance": [
+    "two-finger pinch changes zoom",
+    "flick produces decaying inertia"
+  ],
+  "est_size": "S",
+  "provides": [],
+  "consumes": [
+    "map.viewport"
+  ]
+}

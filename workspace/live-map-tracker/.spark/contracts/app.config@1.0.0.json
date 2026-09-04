@@ -1,0 +1,58 @@
+{
+  "key": "app.config",
+  "kind": "config",
+  "semver": "1.0.0",
+  "state": "locked",
+  "spec": {
+    "key": "app.config",
+    "kind": "config",
+    "direction": "server_to_client",
+    "summary": "Runtime settings the client needs before it can render anything.",
+    "transport": {
+      "method": "",
+      "path": "",
+      "symbol": "APP_CONFIG"
+    },
+    "input": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "appName": {
+          "type": "string"
+        },
+        "apiBaseUrl": {
+          "type": "string"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "appName",
+        "apiBaseUrl"
+      ]
+    },
+    "errors": []
+  },
+  "examples": [
+    {
+      "input": {},
+      "output": {
+        "appName": "appName-1",
+        "apiBaseUrl": "apiBaseUrl-2",
+        "features": [
+          "features-a",
+          "features-b"
+        ]
+      }
+    }
+  ],
+  "spec_hash": "sha256:5aaf7ac1d1d4ffc3ae6a277691a6562fe3db38f309b0a1dcf1fe89b950e0ec54"
+}

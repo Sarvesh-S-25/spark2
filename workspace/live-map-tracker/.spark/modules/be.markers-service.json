@@ -1,0 +1,33 @@
+{
+  "slug": "be.markers-service",
+  "name": "Markers service",
+  "lane": "backend",
+  "kind": "service",
+  "summary": "Bounding-box queries and single-marker detail lookup.",
+  "responsibilities": [
+    "bbox query",
+    "detail lookup",
+    "rate limiting"
+  ],
+  "non_goals": [
+    "ingesting positions",
+    "websocket fan-out"
+  ],
+  "files": [
+    "server/services/markers.ts",
+    "server/routes/markers.ts"
+  ],
+  "acceptance": [
+    "bbox query returns only markers inside the box",
+    "unknown id returns MARKER_NOT_FOUND"
+  ],
+  "est_size": "M",
+  "provides": [
+    "markers.list",
+    "markers.detail"
+  ],
+  "consumes": [
+    "Marker",
+    "positions.store"
+  ]
+}

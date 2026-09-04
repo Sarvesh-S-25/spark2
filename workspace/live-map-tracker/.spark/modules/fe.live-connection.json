@@ -1,0 +1,25 @@
+{
+  "slug": "fe.live-connection",
+  "name": "Live connection",
+  "lane": "frontend",
+  "kind": "state_store",
+  "summary": "Websocket lifecycle: connect, resubscribe on viewport change, reconnect with backoff.",
+  "responsibilities": [
+    "reconnect with backoff",
+    "backfill missed events after a drop"
+  ],
+  "non_goals": [
+    "rendering anything"
+  ],
+  "files": [
+    "src/live/useLiveConnection.ts"
+  ],
+  "acceptance": [
+    "reconnects within 5s of a dropped socket"
+  ],
+  "est_size": "M",
+  "provides": [],
+  "consumes": [
+    "markers.stream"
+  ]
+}

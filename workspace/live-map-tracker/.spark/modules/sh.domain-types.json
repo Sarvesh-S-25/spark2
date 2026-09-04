@@ -1,0 +1,26 @@
+{
+  "slug": "sh.domain-types",
+  "name": "Domain types",
+  "lane": "shared",
+  "kind": "schema",
+  "summary": "The data shapes both lanes agree on, generated into each language from one definition.",
+  "responsibilities": [
+    "own every shared data shape",
+    "own the shared error-code enum"
+  ],
+  "non_goals": [
+    "any behaviour at all — this module holds no logic"
+  ],
+  "files": [
+    "src/spark/types.ts",
+    "server/spark/types.py"
+  ],
+  "acceptance": [
+    "every shared shape is emitted for both lanes from one source"
+  ],
+  "est_size": "S",
+  "provides": [
+    "Marker"
+  ],
+  "consumes": []
+}

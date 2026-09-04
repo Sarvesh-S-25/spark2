@@ -1,0 +1,22 @@
+{
+  "slug": "be.positions-ingest",
+  "name": "Position ingest",
+  "lane": "backend",
+  "kind": "api_route",
+  "summary": "Validates incoming position reports and hands them to the store.",
+  "responsibilities": [],
+  "non_goals": [],
+  "files": [
+    "server/routes/positions.ts"
+  ],
+  "acceptance": [
+    "rejects out-of-range coordinates with COORDS_INVALID"
+  ],
+  "est_size": "S",
+  "provides": [
+    "positions.ingest"
+  ],
+  "consumes": [
+    "positions.store"
+  ]
+}

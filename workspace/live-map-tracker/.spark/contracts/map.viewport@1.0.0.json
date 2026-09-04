@@ -1,0 +1,66 @@
+{
+  "key": "map.viewport",
+  "kind": "function",
+  "semver": "1.0.0",
+  "state": "locked",
+  "spec": {
+    "key": "map.viewport",
+    "kind": "function",
+    "direction": "client_internal",
+    "summary": "Current viewport, published by the canvas to every layer above it.",
+    "transport": {
+      "method": "",
+      "path": "",
+      "symbol": "useViewport"
+    },
+    "input": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "bbox": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "zoom": {
+          "type": "number"
+        },
+        "centerLat": {
+          "type": "number"
+        },
+        "centerLng": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "bbox",
+        "zoom",
+        "centerLat",
+        "centerLng"
+      ]
+    },
+    "errors": []
+  },
+  "examples": [
+    {
+      "input": {},
+      "output": {
+        "bbox": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "zoom": 12.92,
+        "centerLat": 12.93,
+        "centerLng": 12.94
+      }
+    }
+  ],
+  "spec_hash": "sha256:33ac56be56c8f3f39a6968383715d7b7a24a98721dad165e51c0bf29c6ad3860"
+}

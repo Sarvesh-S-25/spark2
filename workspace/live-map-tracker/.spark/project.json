@@ -1,0 +1,12 @@
+{
+  "name": "Live map tracker",
+  "generatedAt": null,
+  "lanes": [
+    "frontend",
+    "backend",
+    "shared",
+    "infra"
+  ],
+  "moduleCount": 13,
+  "contractCount": 9
+}

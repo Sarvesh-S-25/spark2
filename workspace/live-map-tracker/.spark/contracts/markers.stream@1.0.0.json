@@ -1,0 +1,63 @@
+{
+  "key": "markers.stream",
+  "kind": "event",
+  "semver": "1.0.0",
+  "state": "locked",
+  "spec": {
+    "key": "markers.stream",
+    "kind": "event",
+    "direction": "server_to_client",
+    "summary": "Movement events pushed to every client watching that area.",
+    "transport": {
+      "method": "",
+      "path": "",
+      "symbol": "marker.moved"
+    },
+    "input": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        },
+        "headingDeg": {
+          "type": "number"
+        },
+        "at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "lat",
+        "lng",
+        "at"
+      ]
+    },
+    "errors": []
+  },
+  "examples": [
+    {
+      "input": {},
+      "output": {
+        "id": "id_101",
+        "lat": 12.92,
+        "lng": 12.93,
+        "headingDeg": 12.94,
+        "at": "2026-01-01T09:05:00.000Z"
+      }
+    }
+  ],
+  "spec_hash": "sha256:9f7c6d8099a6e19e48448dd10672c0b631d0ae81c57ce2eb4ffbec602b5763f6"
+}

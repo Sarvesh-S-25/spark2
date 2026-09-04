@@ -1,0 +1,31 @@
+{
+  "slug": "fe.map-canvas",
+  "name": "Map canvas",
+  "lane": "frontend",
+  "kind": "ui_component",
+  "summary": "Renders the base map, owns viewport state, publishes it to sibling layers.",
+  "responsibilities": [
+    "mount the tile provider",
+    "own centre and zoom",
+    "publish viewport changes"
+  ],
+  "non_goals": [
+    "marker rendering",
+    "gesture interpretation"
+  ],
+  "files": [
+    "src/map/MapCanvas.tsx",
+    "src/map/useViewport.ts"
+  ],
+  "acceptance": [
+    "renders a map centred on map.config default centre",
+    "publishes map.viewport within 100ms of a pan settling"
+  ],
+  "est_size": "M",
+  "provides": [
+    "map.viewport"
+  ],
+  "consumes": [
+    "map.config"
+  ]
+}

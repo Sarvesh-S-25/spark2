@@ -1,0 +1,22 @@
+{
+  "slug": "be.position-store",
+  "name": "Position store",
+  "lane": "backend",
+  "kind": "adapter",
+  "summary": "Time-series persistence plus a latest-position-per-device index.",
+  "responsibilities": [],
+  "non_goals": [
+    "any HTTP concern"
+  ],
+  "files": [
+    "server/store/positions.ts"
+  ],
+  "acceptance": [
+    "latest-per-device lookup is O(1) on the index"
+  ],
+  "est_size": "M",
+  "provides": [
+    "positions.store"
+  ],
+  "consumes": []
+}

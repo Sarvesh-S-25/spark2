@@ -1,0 +1,103 @@
+{
+  "key": "markers.list",
+  "kind": "http",
+  "semver": "1.0.0",
+  "state": "locked",
+  "spec": {
+    "key": "markers.list",
+    "kind": "http",
+    "direction": "client_to_server",
+    "summary": "Markers currently inside the visible bounding box.",
+    "transport": {
+      "method": "GET",
+      "path": "/api/markers",
+      "symbol": "listMarkers"
+    },
+    "input": {
+      "type": "object",
+      "properties": {
+        "bbox": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "description": "west, south, east, north"
+        },
+        "since": {
+          "type": "string",
+          "format": "date-time",
+          "description": "only markers updated after this instant"
+        }
+      },
+      "required": [
+        "bbox"
+      ]
+    },
+    "output": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "lng": {
+            "type": "number"
+          },
+          "label": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "lat",
+          "lng",
+          "label",
+          "kind",
+          "updatedAt"
+        ]
+      }
+    },
+    "errors": [
+      {
+        "code": "BBOX_INVALID",
+        "when": "bbox is not [w,s,e,n]",
+        "http": 400
+      }
+    ]
+  },
+  "examples": [
+    {
+      "input": {
+        "bbox": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "since": "2026-01-01T09:02:00.000Z"
+      },
+      "output": [
+        {
+          "id": "id_101",
+          "lat": 12.92,
+          "lng": 12.93,
+          "label": "label-4",
+          "kind": "kind-5",
+          "updatedAt": "2026-01-01T09:01:00.000Z"
+        }
+      ]
+    }
+  ],
+  "spec_hash": "sha256:cee8e41453f94899f75fd9127f87c5dce6cc95a4181d446b7ee717f365c37434"
+}

@@ -1,0 +1,76 @@
+{
+  "key": "positions.ingest",
+  "kind": "http",
+  "semver": "1.0.0",
+  "state": "locked",
+  "spec": {
+    "key": "positions.ingest",
+    "kind": "http",
+    "direction": "device_to_server",
+    "summary": "A device or vehicle reporting where it is.",
+    "transport": {
+      "method": "POST",
+      "path": "/api/positions",
+      "symbol": "ingestPositions"
+    },
+    "input": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        },
+        "headingDeg": {
+          "type": "number"
+        },
+        "at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "deviceId",
+        "lat",
+        "lng",
+        "at"
+      ]
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "accepted": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "accepted"
+      ]
+    },
+    "errors": [
+      {
+        "code": "COORDS_INVALID",
+        "when": "lat/lng out of range",
+        "http": 400
+      }
+    ]
+  },
+  "examples": [
+    {
+      "input": {
+        "deviceId": "dev_101",
+        "lat": 12.92,
+        "lng": 12.93,
+        "at": "2026-01-01T09:04:00.000Z"
+      },
+      "output": {
+        "accepted": 12.91
+      }
+    }
+  ],
+  "spec_hash": "sha256:99c3eef72ebb94502d1455a5a35409549921a9365df71c3bbbc3fd7659ca256e"
+}

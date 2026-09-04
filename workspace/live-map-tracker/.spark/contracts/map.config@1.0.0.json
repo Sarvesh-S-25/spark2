@@ -1,0 +1,63 @@
+{
+  "key": "map.config",
+  "kind": "config",
+  "semver": "1.0.0",
+  "state": "locked",
+  "spec": {
+    "key": "map.config",
+    "kind": "config",
+    "direction": "server_to_client",
+    "summary": "Tile provider and default viewport, served once at startup.",
+    "transport": {
+      "method": "",
+      "path": "",
+      "symbol": "MAP_CONFIG"
+    },
+    "input": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "tileUrl": {
+          "type": "string",
+          "description": "XYZ tile template"
+        },
+        "defaultCenterLat": {
+          "type": "number"
+        },
+        "defaultCenterLng": {
+          "type": "number"
+        },
+        "defaultZoom": {
+          "type": "number"
+        },
+        "maxZoom": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "tileUrl",
+        "defaultCenterLat",
+        "defaultCenterLng",
+        "defaultZoom"
+      ]
+    },
+    "errors": []
+  },
+  "examples": [
+    {
+      "input": {},
+      "output": {
+        "tileUrl": "tileUrl-1",
+        "defaultCenterLat": 12.92,
+        "defaultCenterLng": 12.93,
+        "defaultZoom": 12.94,
+        "maxZoom": 12.95
+      }
+    }
+  ],
+  "spec_hash": "sha256:1e9307a37a257a642479feb77c66f42e762df381247040bc31255214cf5af39f"
+}

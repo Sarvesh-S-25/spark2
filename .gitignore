@@ -1,0 +1,8 @@
+node_modules/
+dist-ui/
+data/
+.env
+.gemini/
+*.log
+.DS_Store
+Thumbs.db

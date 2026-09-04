@@ -1,0 +1,23 @@
+{
+  "slug": "fe.marker-detail-sheet",
+  "name": "Marker detail sheet",
+  "lane": "frontend",
+  "kind": "ui_component",
+  "summary": "Bottom sheet showing one marker’s detail when it is tapped.",
+  "responsibilities": [],
+  "non_goals": [
+    "fetching the marker list"
+  ],
+  "files": [
+    "src/map/MarkerDetailSheet.tsx"
+  ],
+  "acceptance": [
+    "opens within 150ms of a tap",
+    "shows a spinner while detail loads"
+  ],
+  "est_size": "S",
+  "provides": [],
+  "consumes": [
+    "markers.detail"
+  ]
+}

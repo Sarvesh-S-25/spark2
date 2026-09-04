@@ -1,0 +1,23 @@
+{
+  "slug": "fe.app-shell",
+  "name": "App shell",
+  "lane": "frontend",
+  "kind": "ui_component",
+  "summary": "Routing, layout and the loading gate that waits for app config.",
+  "responsibilities": [],
+  "non_goals": [
+    "any feature-specific rendering"
+  ],
+  "files": [
+    "src/App.tsx",
+    "src/routes.tsx"
+  ],
+  "acceptance": [
+    "renders a loading state until app.config resolves"
+  ],
+  "est_size": "S",
+  "provides": [],
+  "consumes": [
+    "app.config"
+  ]
+}

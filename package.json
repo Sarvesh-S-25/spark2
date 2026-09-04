@@ -1,0 +1,47 @@
+{
+  "name": "sparkx",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Split a project brief into frontend and backend modules joined by generated, versioned contracts.",
+  "scripts": {
+    "dev": "concurrently -k -n server,ui -c cyan,magenta \"npm:dev:server\" \"npm:dev:ui\"",
+    "dev:server": "tsx watch server/index.ts",
+    "dev:ui": "vite",
+    "start": "tsx server/index.ts",
+    "seed": "tsx server/seed.ts",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "preflight": "node scripts/preflight.mjs",
+    "build:ui": "vite build",
+    "app": "npm run build:ui && electron electron/main.cjs",
+    "eval": "tsx server/splitter/eval.ts",
+    "test": "tsx --test \"server/**/*.test.ts\""
+  },
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "@fastify/static": "^7.0.4",
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.28.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^22.5.4",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^9.0.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.3"
+  },
+  "optionalDependencies": {
+    "electron": "^32.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

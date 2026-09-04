@@ -1,0 +1,24 @@
+{
+  "slug": "be.realtime-hub",
+  "name": "Realtime hub",
+  "lane": "backend",
+  "kind": "service",
+  "summary": "Fans movement events out to subscribers, filtered by their bounding box.",
+  "responsibilities": [],
+  "non_goals": [
+    "persisting anything"
+  ],
+  "files": [
+    "server/realtime/hub.ts"
+  ],
+  "acceptance": [
+    "a client only receives events inside its subscribed bbox"
+  ],
+  "est_size": "M",
+  "provides": [
+    "markers.stream"
+  ],
+  "consumes": [
+    "positions.store"
+  ]
+}
