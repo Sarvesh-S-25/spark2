@@ -171,6 +171,28 @@ export function unblockRanking(projectId: string) {
     .sort((a, b) => b.blocks - a.blocks);
 }
 
+export interface NextActions {
+  /** Modules startable right now — depend on nothing unlocked. */
+  ready: DerivedModule[];
+  /** Unlocked contracts ranked by how many modules they'd unblock, most first. */
+  lockNext: { key: string; blocks: number }[];
+  /** The longest chain of dependent, unfinished modules. */
+  criticalPath: string[];
+}
+
+/**
+ * "What can I start right now, what should be locked next, what's on the
+ * critical path" — the one call `spark_next` exists to make possible. Composes
+ * the three functions above; no new derivation logic lives here.
+ */
+export function nextActions(projectId: string): NextActions {
+  return {
+    ready: deriveAll(projectId).filter((m) => m.status === 'ready'),
+    lockNext: unblockRanking(projectId).slice(0, 5),
+    criticalPath: criticalPath(projectId),
+  };
+}
+
 /** Longest chain of dependent, not-yet-finished modules. */
 export function criticalPath(projectId: string): string[] {
   const derived = deriveAll(projectId);

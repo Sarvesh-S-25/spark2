@@ -4,6 +4,7 @@ import { providerReport } from './models/registry.js';
 import { runSplit } from './splitter/index.js';
 import { draftPlan } from './splitter/plan.js';
 import { deriveAll, unblockRanking, criticalPath } from './status/derive.js';
+import { recordStatusEvent } from './status/events.js';
 import { generate, PACKS, loadGenContracts } from './generate/index.js';
 import { toOpenApi } from './generate/openapi.js';
 import { runCheck, type Level } from './deps/check.js';
@@ -11,6 +12,7 @@ import { zContractSpec, type ContractSpec, type ContractExample, type ContractSt
 import { specHash } from './contracts/build.js';
 import { diffContracts } from './contracts/diff.js';
 import { canTransition } from './contracts/state.js';
+import { currentVersion, contractRows, changeRequestRows } from './contracts/rows.js';
 
 /**
  * Every HTTP endpoint SparkX has.
@@ -144,7 +146,7 @@ export async function registerApi(app: FastifyInstance): Promise<void> {
     conn.prepare(`INSERT INTO claim (module_id, assignee, claimed_at, last_activity_at) VALUES (?,?,?,?)
                   ON CONFLICT(module_id) DO UPDATE SET assignee = excluded.assignee, last_activity_at = excluded.last_activity_at`)
       .run(id, assignee.trim(), now(), now());
-    event(id, 'building', 'claimed', assignee.trim());
+    recordStatusEvent(id, 'building', 'claimed', assignee.trim());
     return { ok: true };
   });
 
@@ -165,7 +167,7 @@ export async function registerApi(app: FastifyInstance): Promise<void> {
     const { id } = req.params as { id: string };
     const { status, actor } = req.body as { status?: string | null; actor?: string };
     conn.prepare('UPDATE module SET manual_status = ? WHERE id = ?').run(status ?? null, id);
-    event(id, status ?? 'derived', status ? 'asserted' : 'derived', actor ?? 'someone');
+    recordStatusEvent(id, status ?? 'derived', status ? 'asserted' : 'derived', actor ?? 'someone');
     return { ok: true };
   });
 
@@ -481,53 +483,6 @@ export async function registerApi(app: FastifyInstance): Promise<void> {
     }));
   });
 
-  // ── helpers used by several routes ─────────────────────────────────────────
-
-  function currentVersion(contractId: string): any {
-    return conn.prepare(`
-      SELECT cv.* FROM contract_version cv
-      JOIN contract c ON c.id = cv.contract_id AND c.current_version = cv.semver
-      WHERE cv.contract_id = ?`).get(contractId);
-  }
-
-  function contractRows(projectId: string) {
-    return conn.prepare(`
-      SELECT c.id, c.key, c.kind, c.current_version AS semver, cv.state, cv.spec_json, cv.examples_json, cv.spec_hash,
-        (SELECT m.slug FROM module_contract mc JOIN module m ON m.id = mc.module_id
-          WHERE mc.contract_id = c.id AND mc.role = 'provides') AS provider,
-        (SELECT COUNT(*) FROM module_contract mc WHERE mc.contract_id = c.id AND mc.role = 'consumes') AS consumer_count
-      FROM contract c
-      LEFT JOIN contract_version cv ON cv.contract_id = c.id AND cv.semver = c.current_version
-      WHERE c.project_id = ? ORDER BY c.kind, c.key`).all(projectId).map((r: any) => ({
-      ...r,
-      spec: j(r.spec_json, {}),
-      examples: j(r.examples_json, []),
-      consumers: conn.prepare(`
-        SELECT m.slug, m.lane, m.id FROM module_contract mc JOIN module m ON m.id = mc.module_id
-        WHERE mc.contract_id = ? AND mc.role = 'consumes'`).all(r.id),
-    }));
-  }
-
-  function changeRequestRows(projectId: string) {
-    return conn.prepare(`
-      SELECT cr.*, c.key FROM change_request cr
-      JOIN contract c ON c.id = cr.contract_id
-      WHERE c.project_id = ? ORDER BY cr.opened_at DESC`).all(projectId).map((r: any) => ({
-      ...r,
-      proposedSpec: j(r.proposed_spec_json, {}),
-      acks: conn.prepare(`
-        SELECT ca.*, m.slug FROM change_ack ca JOIN module m ON m.id = ca.module_id
-        WHERE ca.change_request_id = ?`).all(r.id),
-      consumers: conn.prepare(`
-        SELECT m.id, m.slug FROM module_contract mc JOIN module m ON m.id = mc.module_id
-        WHERE mc.contract_id = ? AND mc.role = 'consumes'`).all(r.contract_id),
-    }));
-  }
-
-  function event(moduleId: string, to: string, cause: string, actor: string): void {
-    conn.prepare('INSERT INTO status_event (id, module_id, to_status, cause, actor, at) VALUES (?,?,?,?,?,?)')
-      .run(uid('ev'), moduleId, to, cause, actor, now());
-  }
 }
 
 const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'project';
